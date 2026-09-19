@@ -1,0 +1,661 @@
+/* ==========================================================================
+   ALTYNAI ROMANTIC GREETING CARD - DESIGN SYSTEM & STYLES
+   ========================================================================== */
+
+/* --- CSS Variables & Design System --- */
+:root {
+  --bg-main: #FFFDF9;
+  --bg-card: #FAF6F0;
+  --bg-accent: #FDF0ED;
+  --bg-pink-soft: #FBE8E7;
+  
+  --primary-rose: #D98880;
+  --primary-rose-hover: #C5736B;
+  --primary-rose-light: #F4A5A5;
+  
+  --text-dark: #5C3A3E;
+  --text-muted: #8A6D71;
+  --text-light: #B59B9E;
+  
+  --shadow-soft: 0 10px 35px rgba(92, 58, 62, 0.07);
+  --shadow-card: 0 14px 40px rgba(92, 58, 62, 0.1);
+  --shadow-button: 0 6px 20px rgba(217, 136, 128, 0.25);
+  
+  --font-main: 'Manrope', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-handwritten: 'Caveat', cursive, sans-serif;
+  
+  --radius-sm: 12px;
+  --radius-md: 20px;
+  --radius-lg: 28px;
+  --radius-full: 9999px;
+  
+  --transition-fast: 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-normal: 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-slow: 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* --- Global Reset & Mobile Foundation --- */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  -webkit-tap-highlight-color: transparent;
+}
+
+html, body {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background-color: #F5EEE6; /* Desktop background frame */
+  color: var(--text-dark);
+  font-family: var(--font-main);
+  font-size: 16px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* --- Particle Canvas Layer --- */
+#particle-canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 10;
+}
+
+/* --- Main Desktop Mockup Frame / Mobile Viewport --- */
+.app-container {
+  position: relative;
+  width: 100%;
+  max-width: 430px; /* Constrained for mobile aesthetic on desktop */
+  height: 100%;
+  height: 100dvh;
+  margin: 0 auto;
+  background-color: var(--bg-main);
+  box-shadow: var(--shadow-card);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+
+  /* Support iOS safe area insets */
+  padding-top: env(safe-area-inset-top, 0px);
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+  padding-left: env(safe-area-inset-left, 0px);
+  padding-right: env(safe-area-inset-right, 0px);
+}
+
+/* --- Top Floating Controls --- */
+.top-controls {
+  position: absolute;
+  top: max(16px, env(safe-area-inset-top));
+  right: 16px;
+  z-index: 50;
+}
+
+.control-btn {
+  width: 44px;
+  height: 44px;
+  border-radius: var(--radius-full);
+  border: 1px solid rgba(217, 136, 128, 0.2);
+  background: rgba(255, 253, 249, 0.85);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  color: var(--primary-rose);
+  font-size: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 4px 15px rgba(92, 58, 62, 0.06);
+  transition: transform var(--transition-fast), background var(--transition-fast);
+}
+
+.control-btn:active {
+  transform: scale(0.92);
+}
+
+.control-btn.playing {
+  background: var(--bg-pink-soft);
+  color: var(--primary-rose-hover);
+  animation: pulse-subtle 2s infinite ease-in-out;
+}
+
+/* --- Progress Bar Indicator --- */
+.progress-bar-container {
+  position: absolute;
+  top: max(8px, env(safe-area-inset-top));
+  left: 20px;
+  right: 70px;
+  height: 4px;
+  background: rgba(217, 136, 128, 0.15);
+  border-radius: var(--radius-full);
+  overflow: hidden;
+  z-index: 40;
+}
+
+.progress-fill {
+  height: 100%;
+  width: 12.5%; /* 1 of 8 scenes */
+  background: var(--primary-rose);
+  border-radius: var(--radius-full);
+  transition: width var(--transition-normal);
+}
+
+/* --- Scene State Engine --- */
+.scene {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  padding: 60px 24px 40px 24px;
+  display: flex;
+  flex-direction: column;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(12px) scale(0.98);
+  transition: opacity var(--transition-slow), transform var(--transition-slow), visibility var(--transition-slow);
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  z-index: 1;
+}
+
+.scene.active {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0) scale(1);
+  z-index: 2;
+}
+
+.scene-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 100%;
+  min-height: 100%;
+}
+
+.scene-content.center {
+  align-items: center;
+  text-align: center;
+}
+
+.spacer {
+  flex-grow: 1;
+  min-height: 24px;
+}
+
+.spacer-sm {
+  height: 20px;
+}
+
+/* --- Buttons System --- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 52px;
+  padding: 14px 32px;
+  border-radius: var(--radius-full);
+  font-family: var(--font-main);
+  font-size: 16px;
+  font-weight: 600;
+  letter-spacing: 0.2px;
+  border: none;
+  cursor: pointer;
+  user-select: none;
+  touch-action: manipulation;
+  transition: transform var(--transition-fast), box-shadow var(--transition-fast), background-color var(--transition-fast);
+}
+
+.btn-primary {
+  background-color: var(--primary-rose);
+  color: #FFFFFF;
+  box-shadow: var(--shadow-button);
+}
+
+.btn-primary:active {
+  transform: scale(0.96);
+  background-color: var(--primary-rose-hover);
+}
+
+.btn-secondary {
+  background-color: var(--bg-accent);
+  color: var(--text-dark);
+  border: 1px solid rgba(217, 136, 128, 0.2);
+}
+
+.btn-secondary:active {
+  transform: scale(0.96);
+  background-color: var(--bg-pink-soft);
+}
+
+.center-self {
+  align-self: center;
+}
+
+/* --- Typography & Text Elements --- */
+.scene-headline {
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--text-dark);
+  margin-bottom: 12px;
+  line-height: 1.35;
+}
+
+.scene-headline.soft {
+  font-weight: 500;
+  color: var(--text-muted);
+}
+
+.scene-subtext {
+  font-size: 16px;
+  color: var(--text-muted);
+  max-width: 320px;
+  line-height: 1.5;
+}
+
+.scene-note {
+  font-size: 15px;
+  color: var(--primary-rose);
+  margin-top: 16px;
+  font-weight: 500;
+  line-height: 1.6;
+}
+
+/* --- SCENE 1 SPECIFIC --- */
+.intro-heart-wrapper {
+  margin-bottom: 24px;
+}
+
+.intro-heart {
+  font-size: 48px;
+  color: var(--primary-rose);
+  display: inline-block;
+  animation: heart-scale 3.5s infinite ease-in-out;
+}
+
+.intro-title {
+  font-family: var(--font-handwritten);
+  font-size: 32px;
+  font-weight: 600;
+  color: var(--text-dark);
+  line-height: 1.3;
+  margin-bottom: 12px;
+}
+
+/* --- SCENE 2 & TEDDY BEAR --- */
+.teddy-container {
+  position: relative;
+  margin-bottom: 20px;
+  cursor: pointer;
+  user-select: none;
+  animation: teddy-sway 4s infinite ease-in-out;
+}
+
+.teddy-bear-group {
+  transform-origin: center bottom;
+  transition: transform var(--transition-normal);
+}
+
+.teddy-container:active .teddy-bear-group {
+  transform: scale(1.06) translateY(-4px);
+}
+
+.tap-hint {
+  font-size: 12px;
+  color: var(--text-light);
+  margin-top: 6px;
+  opacity: 0.8;
+}
+
+/* --- SCENE 3 LETTER / PAPER CARD --- */
+.paper-card {
+  position: relative;
+  background-color: var(--bg-card);
+  background-image: radial-gradient(rgba(217, 136, 128, 0.05) 1px, transparent 0);
+  background-size: 16px 16px;
+  border-radius: var(--radius-md);
+  padding: 30px 24px;
+  box-shadow: var(--shadow-soft);
+  border: 1px solid rgba(230, 196, 170, 0.4);
+  max-height: 68dvh;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.card-sticker {
+  position: absolute;
+  top: 14px;
+  right: 18px;
+  font-size: 18px;
+  opacity: 0.8;
+}
+
+.letter-body p {
+  font-size: 15px;
+  color: var(--text-dark);
+  margin-bottom: 14px;
+  line-height: 1.65;
+}
+
+.letter-body p:last-child {
+  margin-bottom: 0;
+}
+
+.letter-accent {
+  font-weight: 600;
+  color: var(--text-dark);
+}
+
+/* --- SCENE 4 FLOWERS --- */
+.flowers-illustration-container {
+  margin-bottom: 16px;
+}
+
+.flower-bud {
+  transform-origin: center bottom;
+  animation: bud-grow 1.2s ease-out forwards;
+  opacity: 0;
+}
+
+.bud-1 { animation-delay: 0.2s; }
+.bud-2 { animation-delay: 0.5s; }
+.bud-3 { animation-delay: 0.8s; }
+.bud-4 { animation-delay: 1.1s; }
+.bud-5 { animation-delay: 1.4s; }
+
+/* --- SCENE 5 GIFT --- */
+.gift-scene-wrapper {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.gift-box {
+  width: 90px;
+  height: 80px;
+  background-color: var(--primary-rose);
+  border-radius: var(--radius-sm);
+  position: relative;
+  margin-top: -30px;
+  box-shadow: 0 8px 24px rgba(217, 136, 128, 0.3);
+  cursor: pointer;
+  animation: gift-wobble 3s infinite ease-in-out;
+}
+
+.gift-lid {
+  position: absolute;
+  top: -14px;
+  left: -5px;
+  width: 100px;
+  height: 20px;
+  background-color: #E88D8D;
+  border-radius: 6px;
+  transition: transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+  box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+}
+
+.gift-bow {
+  position: absolute;
+  top: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 24px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--bg-main);
+  box-shadow: 0 0 0 3px var(--primary-rose-hover);
+}
+
+.gift-ribbon-v {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 16px;
+  height: 100%;
+  background-color: #FFFDF9;
+  opacity: 0.9;
+}
+
+.gift-box.opened .gift-lid {
+  transform: translateY(-40px) rotate(-18deg);
+}
+
+.mini-bear-reveal {
+  margin-bottom: 16px;
+  animation: pop-bounce 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.mini-bear-icon {
+  font-size: 54px;
+  display: inline-block;
+}
+
+/* --- SCENE 6 MINIMALIST SINCERE MESSAGE --- */
+.sincere-block {
+  width: 100%;
+  margin-bottom: 20px;
+  transition: opacity var(--transition-slow), transform var(--transition-slow);
+}
+
+.sincere-card {
+  background: var(--bg-card);
+  padding: 24px 20px;
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-soft);
+  text-align: left;
+}
+
+.sincere-card p {
+  font-size: 15px;
+  margin-bottom: 12px;
+  color: var(--text-dark);
+}
+
+.sincere-highlight {
+  font-weight: 600;
+  color: var(--primary-rose);
+}
+
+.scene-question-prompt {
+  font-family: var(--font-handwritten);
+  font-size: 26px;
+  color: var(--text-muted);
+  margin-top: 10px;
+}
+
+/* --- SCENE 7 INTERACTION QUESTION --- */
+.question-title {
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--text-dark);
+  margin-bottom: 30px;
+  line-height: 1.4;
+}
+
+.question-buttons-container {
+  display: flex;
+  gap: 16px;
+  width: 100%;
+  justify-content: center;
+  position: relative;
+  min-height: 80px;
+}
+
+.btn-yes {
+  background-color: #88C090;
+  color: #FFFFFF;
+  flex: 1;
+  max-width: 160px;
+  box-shadow: 0 6px 20px rgba(136, 192, 144, 0.3);
+}
+
+.btn-yes:active {
+  background-color: #74B07C;
+}
+
+.btn-no {
+  background-color: var(--bg-accent);
+  color: var(--text-dark);
+  border: 1px solid rgba(217, 136, 128, 0.25);
+  flex: 1;
+  max-width: 160px;
+  transition: transform 0.2s ease, left 0.2s ease, top 0.2s ease;
+}
+
+.question-response {
+  margin-top: 20px;
+  width: 100%;
+}
+
+.response-icon {
+  font-size: 52px;
+  margin-bottom: 12px;
+}
+
+.response-headline {
+  font-size: 22px;
+  color: var(--text-dark);
+  font-weight: 600;
+  line-height: 1.4;
+}
+
+/* --- SCENE 8 FINAL --- */
+.final-scene-content {
+  padding-bottom: 20px;
+}
+
+.final-card {
+  background-color: var(--bg-card);
+  padding: 24px 20px;
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-soft);
+  margin-bottom: 24px;
+  text-align: left;
+}
+
+.final-card p {
+  font-size: 15px;
+  color: var(--text-dark);
+  margin-bottom: 12px;
+}
+
+.final-apology {
+  font-weight: 600;
+  color: var(--primary-rose);
+}
+
+.final-wish {
+  font-family: var(--font-handwritten);
+  font-size: 32px;
+  color: var(--text-dark);
+  font-weight: 600;
+  line-height: 1.3;
+}
+
+.final-pulsing-heart {
+  font-size: 32px;
+  margin-top: 8px;
+  display: inline-block;
+  animation: heart-pulse-beat 1.8s infinite ease-in-out;
+}
+
+.final-illustration {
+  margin-top: auto;
+  cursor: pointer;
+}
+
+/* --- TOAST NOTIFICATION FOR EASTER EGG --- */
+.toast {
+  position: absolute;
+  top: max(70px, calc(env(safe-area-inset-top) + 60px));
+  left: 50%;
+  transform: translateX(-50%) translateY(-20px);
+  background: rgba(92, 58, 62, 0.92);
+  color: #FFFFFF;
+  padding: 12px 22px;
+  border-radius: var(--radius-full);
+  font-size: 14px;
+  font-weight: 500;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+  z-index: 100;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.4s ease, transform 0.4s ease;
+  white-space: nowrap;
+}
+
+.toast.show {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
+/* --- HELPER CLASSES --- */
+.hidden-fade {
+  display: none;
+  opacity: 0;
+  transition: opacity var(--transition-slow);
+}
+
+.hidden-fade.show {
+  display: block;
+  opacity: 1;
+}
+
+/* --- KEYFRAME ANIMATIONS --- */
+@keyframes heart-scale {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.22); }
+}
+
+@keyframes teddy-sway {
+  0%, 100% { transform: rotate(0deg); }
+  25% { transform: rotate(-2.5deg); }
+  75% { transform: rotate(2.5deg); }
+}
+
+@keyframes bud-grow {
+  0% { transform: scale(0.2) translateY(30px); opacity: 0; }
+  100% { transform: scale(1) translateY(0); opacity: 1; }
+}
+
+@keyframes gift-wobble {
+  0%, 100% { transform: rotate(0deg); }
+  85% { transform: rotate(0deg); }
+  90% { transform: rotate(-4deg); }
+  95% { transform: rotate(4deg); }
+}
+
+@keyframes pop-bounce {
+  0% { transform: scale(0.3); opacity: 0; }
+  70% { transform: scale(1.15); opacity: 1; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+@keyframes pulse-subtle {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.08); }
+}
+
+@keyframes heart-pulse-beat {
+  0%, 100% { transform: scale(1); }
+  15% { transform: scale(1.25); }
+  30% { transform: scale(1); }
+  45% { transform: scale(1.18); }
+}
+
+/* --- PREFERS-REDUCED-MOTION SUPPORT --- */
+@media (prefers-reduced-motion: reduce) {
+  *, ::before, ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

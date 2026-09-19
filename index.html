@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <title>Для одной очень красивой девочки ❤️</title>
+  
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Canvas for particle animations -->
+  <canvas id="particle-canvas"></canvas>
+
+  <!-- Audio element (fallback to Web Audio synthesizer if missing) -->
+  <audio id="bg-music" loop preload="auto">
+    <source src="assets/music.mp3" type="audio/mpeg">
+  </audio>
+
+  <!-- Floating controls -->
+  <div class="top-controls">
+    <button id="music-toggle" class="control-btn" aria-label="Включить музыку" title="Включить музыку">
+      <span class="music-icon">♫</span>
+    </button>
+  </div>
+
+  <!-- Progress bar -->
+  <div class="progress-bar-container">
+    <div id="progress-fill" class="progress-fill"></div>
+  </div>
+
+  <!-- Easter egg Toast -->
+  <div id="toast" class="toast hidden" role="status"></div>
+
+  <!-- Main Phone Wrapper container for desktop fallback framing -->
+  <main class="app-container">
+
+    <!-- SCENE 1 — INTRO -->
+    <section id="scene-1" class="scene active">
+      <div class="scene-content center">
+        <div class="intro-heart-wrapper">
+          <span class="intro-heart">♡</span>
+        </div>
+        <h1 class="intro-title fade-in-text">для одной очень красивой девочки</h1>
+        <div class="spacer"></div>
+        <button id="btn-scene-1-next" class="btn btn-primary">
+          у меня для тебя кое-что есть &rarr;
+        </button>
+      </div>
+    </section>
+
+    <!-- SCENE 2 — TEDDY BEAR -->
+    <section id="scene-2" class="scene">
+      <div class="scene-content center">
+        <div class="teddy-container" id="teddy-scene-2" data-easter-egg="true">
+          <svg class="teddy-svg" viewBox="0 0 200 220" width="180" height="198" aria-label="Плюшевый мишка">
+            <g class="teddy-bear-group">
+              <!-- Ears -->
+              <circle cx="55" cy="55" r="24" fill="#C49A76" />
+              <circle cx="55" cy="55" r="14" fill="#E6C4AA" />
+              <circle cx="145" cy="55" r="24" fill="#C49A76" />
+              <circle cx="145" cy="55" r="14" fill="#E6C4AA" />
+              
+              <!-- Head -->
+              <circle cx="100" cy="85" r="52" fill="#B58862" />
+              <!-- Muzzle -->
+              <ellipse cx="100" cy="98" rx="26" ry="20" fill="#E6C4AA" />
+              <!-- Nose -->
+              <ellipse cx="100" cy="90" rx="10" ry="7" fill="#5C3A3E" />
+              <!-- Smile -->
+              <path d="M 94 98 Q 100 104 106 98" fill="none" stroke="#5C3A3E" stroke-width="2.5" stroke-linecap="round" />
+              
+              <!-- Eyes -->
+              <circle id="teddy-eye-left" cx="80" cy="78" r="5.5" fill="#3D231E" />
+              <circle id="teddy-eye-right" cx="120" cy="78" r="5.5" fill="#3D231E" />
+              <circle cx="82" cy="76" r="1.8" fill="#FFFFFF" />
+              <circle cx="122" cy="76" r="1.8" fill="#FFFFFF" />
+              
+              <!-- Cheeks -->
+              <ellipse cx="70" cy="92" rx="7" ry="4.5" fill="#F4A5A5" opacity="0.65" />
+              <ellipse cx="130" cy="92" rx="7" ry="4.5" fill="#F4A5A5" opacity="0.65" />
+
+              <!-- Body -->
+              <path d="M 62 125 C 62 110, 138 110, 138 125 C 145 155, 140 190, 100 190 C 60 190, 55 155, 62 125 Z" fill="#B58862" />
+              <!-- Belly patch -->
+              <ellipse cx="100" cy="150" rx="26" ry="24" fill="#E6C4AA" />
+              
+              <!-- Paws Left & Right (Foot) -->
+              <ellipse cx="62" cy="180" rx="18" ry="14" fill="#B58862" />
+              <ellipse cx="62" cy="180" rx="11" ry="8" fill="#E6C4AA" />
+              <ellipse cx="138" cy="180" rx="18" ry="14" fill="#B58862" />
+              <ellipse cx="138" cy="180" rx="11" ry="8" fill="#E6C4AA" />
+
+              <!-- Arms -->
+              <path class="paw-left" d="M 64 125 C 45 135, 45 155, 66 160 C 72 152, 70 135, 64 125 Z" fill="#A47752" />
+              <path class="paw-right" d="M 136 125 C 155 135, 155 155, 134 160 C 128 152, 130 135, 136 125 Z" fill="#A47752" />
+
+              <!-- Heart badge -->
+              <path d="M 100 144 C 95 138, 86 142, 89 149 C 92 155, 100 160, 100 160 C 100 160, 108 155, 111 149 C 114 142, 105 138, 100 144 Z" fill="#D98880" />
+            </g>
+          </svg>
+          <div class="tap-hint">нажми на мишку 🧸</div>
+        </div>
+
+        <h2 class="scene-headline">Привет, зайка ❤️</h2>
+        <p class="scene-subtext">Я тут кое-что приготовил для тебя...</p>
+        
+        <div class="spacer"></div>
+        <button id="btn-scene-2-next" class="btn btn-primary">
+          Открыть 🧸
+        </button>
+      </div>
+    </section>
+
+    <!-- SCENE 3 — LETTER -->
+    <section id="scene-3" class="scene">
+      <div class="scene-content">
+        <div class="paper-card">
+          <div class="card-sticker">❤️</div>
+          <div class="letter-body">
+            <p>Я долго думал, как правильно это сказать.</p>
+            <p>Вчера я сказал то, о чём потом пожалел.</p>
+            <p>Я правда не хотел тебя задеть или заставить почувствовать, будто мне от тебя чего-то недостаточно.</p>
+            <p>Мне просто важно, чтобы ты знала — мне действительно нравится заботиться о тебе, делать тебе приятно и видеть твою улыбку.</p>
+            <p>И то, что я сделал вчера, я делал не ради чего-то в ответ.</p>
+            <p>Поэтому прости меня за мои глупые слова.<br>Я иногда сначала говорю, а потом думаю 😅</p>
+            <p class="letter-accent">Ты мне правда очень нравишься.</p>
+            <p class="letter-accent">Ты красивая, милая и особенная для меня. ❤️</p>
+          </div>
+        </div>
+
+        <div class="spacer-sm"></div>
+        <button id="btn-scene-3-next" class="btn btn-primary center-self">
+          И это ещё не всё &rarr;
+        </button>
+      </div>
+    </section>
+
+    <!-- SCENE 4 — FLOWERS -->
+    <section id="scene-4" class="scene">
+      <div class="scene-content center">
+        <div class="flowers-illustration-container">
+          <svg class="bouquet-svg" viewBox="0 0 240 260" width="220" height="240" aria-label="Букет цветов">
+            <!-- Bouquet Ribbon / Wrap -->
+            <path d="M 80 250 L 105 170 C 105 170 120 160 135 170 L 160 250 Z" fill="#FDF0ED" stroke="#E6C4AA" stroke-width="2" />
+            <path d="M 100 185 Q 120 195 140 185" fill="none" stroke="#D98880" stroke-width="3" />
+            <circle cx="120" cy="188" r="5" fill="#D98880" />
+
+            <!-- Stems -->
+            <path d="M 120 185 Q 110 140 95 90" stroke="#7AA37B" stroke-width="4" fill="none" stroke-linecap="round" />
+            <path d="M 120 185 Q 120 130 120 70" stroke="#689369" stroke-width="4" fill="none" stroke-linecap="round" />
+            <path d="M 120 185 Q 130 140 145 95" stroke="#7AA37B" stroke-width="4" fill="none" stroke-linecap="round" />
+            <path d="M 120 185 Q 90 150 70 115" stroke="#689369" stroke-width="3.5" fill="none" stroke-linecap="round" />
+            <path d="M 120 185 Q 150 150 170 110" stroke="#689369" stroke-width="3.5" fill="none" stroke-linecap="round" />
+
+            <!-- Leaves -->
+            <path d="M 115 150 Q 95 145 90 130 Q 105 135 115 150 Z" fill="#7AA37B" />
+            <path d="M 125 140 Q 145 135 150 120 Q 135 125 125 140 Z" fill="#689369" />
+
+            <!-- Flowers Blooming Group (Staggered Animations) -->
+            <!-- Flower 1: Left Tulip -->
+            <g class="flower-bud bud-1" transform="translate(70, 115)">
+              <path d="M -12 0 C -18 -15, -10 -30, 0 -35 C 10 -30, 18 -15, 12 0 Z" fill="#F4A5A5" />
+              <path d="M -8 -2 C -12 -14, -4 -25, 0 -32 C 4 -25, 12 -14, 8 -2 Z" fill="#E88D8D" />
+            </g>
+
+            <!-- Flower 2: Far Right Tulip -->
+            <g class="flower-bud bud-2" transform="translate(170, 110)">
+              <path d="M -12 0 C -18 -15, -10 -30, 0 -35 C 10 -30, 18 -15, 12 0 Z" fill="#F7C5C5" />
+              <path d="M -8 -2 C -12 -14, -4 -25, 0 -32 C 4 -25, 12 -14, 8 -2 Z" fill="#E88D8D" />
+            </g>
+
+            <!-- Flower 3: Mid-Left Flower -->
+            <g class="flower-bud bud-3" transform="translate(95, 90)">
+              <circle cx="0" cy="0" r="14" fill="#FDF0ED" stroke="#F4A5A5" stroke-width="3" />
+              <circle cx="-10" cy="-6" r="9" fill="#F7C5C5" />
+              <circle cx="10" cy="-6" r="9" fill="#F7C5C5" />
+              <circle cx="0" cy="-12" r="9" fill="#F4A5A5" />
+              <circle cx="0" cy="0" r="6" fill="#F9E2AF" />
+            </g>
+
+            <!-- Flower 4: Mid-Right Flower -->
+            <g class="flower-bud bud-4" transform="translate(145, 95)">
+              <circle cx="0" cy="0" r="14" fill="#FDF0ED" stroke="#F4A5A5" stroke-width="3" />
+              <circle cx="-10" cy="-6" r="9" fill="#F7C5C5" />
+              <circle cx="10" cy="-6" r="9" fill="#F7C5C5" />
+              <circle cx="0" cy="-12" r="9" fill="#F4A5A5" />
+              <circle cx="0" cy="0" r="6" fill="#F9E2AF" />
+            </g>
+
+            <!-- Flower 5: Center Top Tulip (Main) -->
+            <g class="flower-bud bud-5" transform="translate(120, 70)">
+              <path d="M -16 0 C -24 -20, -12 -42, 0 -48 C 12 -42, 24 -20, 16 0 Z" fill="#D98880" />
+              <path d="M -10 0 C -15 -18, -6 -35, 0 -42 C 6 -35, 15 -18, 10 0 Z" fill="#E88D8D" />
+              <path d="M -4 0 C -6 -12, 0 -25, 0 -28 C 0 -25, 6 -12, 4 0 Z" fill="#FFFDF9" />
+            </g>
+          </svg>
+        </div>
+
+        <h2 class="scene-headline">Это тебе 🌷</h2>
+        <p class="scene-subtext">Просто потому что мне захотелось тебя порадовать.</p>
+        <p class="scene-note">Без условий.<br>Без ожиданий.<br>Просто для тебя. ❤️</p>
+        
+        <div class="spacer"></div>
+        <button id="btn-scene-4-next" class="btn btn-primary">
+          Дальше &rarr;
+        </button>
+      </div>
+    </section>
+
+    <!-- SCENE 5 — GIFT -->
+    <section id="scene-5" class="scene">
+      <div class="scene-content center">
+        <!-- Teddy holding Gift Box -->
+        <div class="gift-scene-wrapper" id="gift-wrapper">
+          <div class="teddy-container" id="teddy-scene-5" data-easter-egg="true">
+            <svg class="teddy-svg" viewBox="0 0 200 220" width="170" height="187" aria-label="Мишка с подарком">
+              <g class="teddy-bear-group">
+                <!-- Ears -->
+                <circle cx="55" cy="55" r="24" fill="#C49A76" />
+                <circle cx="55" cy="55" r="14" fill="#E6C4AA" />
+                <circle cx="145" cy="55" r="24" fill="#C49A76" />
+                <circle cx="145" cy="55" r="14" fill="#E6C4AA" />
+                
+                <!-- Head -->
+                <circle cx="100" cy="85" r="52" fill="#B58862" />
+                <ellipse cx="100" cy="98" rx="26" ry="20" fill="#E6C4AA" />
+                <ellipse cx="100" cy="90" rx="10" ry="7" fill="#5C3A3E" />
+                <path d="M 94 98 Q 100 104 106 98" fill="none" stroke="#5C3A3E" stroke-width="2.5" stroke-linecap="round" />
+                
+                <circle cx="80" cy="78" r="5.5" fill="#3D231E" />
+                <circle cx="120" cy="78" r="5.5" fill="#3D231E" />
+                <circle cx="82" cy="76" r="1.8" fill="#FFFFFF" />
+                <circle cx="122" cy="76" r="1.8" fill="#FFFFFF" />
+                
+                <ellipse cx="70" cy="92" rx="7" ry="4.5" fill="#F4A5A5" opacity="0.65" />
+                <ellipse cx="130" cy="92" rx="7" ry="4.5" fill="#F4A5A5" opacity="0.65" />
+
+                <!-- Body -->
+                <path d="M 62 125 C 62 110, 138 110, 138 125 C 145 155, 140 190, 100 190 C 60 190, 55 155, 62 125 Z" fill="#B58862" />
+                <ellipse cx="100" cy="150" rx="26" ry="24" fill="#E6C4AA" />
+                
+                <!-- Paws Feet -->
+                <ellipse cx="62" cy="180" rx="18" ry="14" fill="#B58862" />
+                <ellipse cx="62" cy="180" rx="11" ry="8" fill="#E6C4AA" />
+                <ellipse cx="138" cy="180" rx="18" ry="14" fill="#B58862" />
+                <ellipse cx="138" cy="180" rx="11" ry="8" fill="#E6C4AA" />
+
+                <!-- Arms holding box forward -->
+                <path d="M 60 125 C 50 145, 75 165, 85 160 Z" fill="#A47752" />
+                <path d="M 140 125 C 150 145, 125 165, 115 160 Z" fill="#A47752" />
+              </g>
+            </svg>
+          </div>
+
+          <!-- Gift Box -->
+          <div class="gift-box" id="gift-box" role="button" aria-label="Подарочная коробка">
+            <div class="gift-lid" id="gift-lid">
+              <div class="gift-bow"></div>
+            </div>
+            <div class="gift-body">
+              <div class="gift-ribbon-v"></div>
+            </div>
+          </div>
+        </div>
+
+        <div id="gift-text-initial">
+          <h2 class="scene-headline">Кажется, кое-кто ещё что-то принёс...</h2>
+          <div class="spacer"></div>
+          <button id="btn-open-gift" class="btn btn-primary">
+            Что там? 👀
+          </button>
+        </div>
+
+        <!-- Revealed after opening gift -->
+        <div id="gift-text-opened" class="hidden-fade">
+          <div class="mini-bear-reveal">
+            <span class="mini-bear-icon">🧸✨</span>
+          </div>
+          <h2 class="scene-headline">Теперь он твой.</h2>
+          <p class="scene-subtext">Только сильно его не обижай.<br>Он вообще-то очень нежный 😌</p>
+          <div class="spacer"></div>
+          <button id="btn-scene-5-next" class="btn btn-primary">
+            Продолжить &rarr;
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- SCENE 6 — SINCERE MESSAGE -->
+    <section id="scene-6" class="scene">
+      <div class="scene-content center minimalist">
+        <div id="sincere-step-1" class="sincere-block">
+          <h2 class="scene-headline soft">И последнее...</h2>
+        </div>
+
+        <div id="sincere-step-2" class="sincere-block hidden-fade">
+          <div class="sincere-card">
+            <p>Я не хочу портить то хорошее, что между нами есть из-за одной глупости.</p>
+            <p>Я правда постараюсь больше думать перед тем, как что-то говорить.</p>
+            <p>Мне хочется продолжать узнавать тебя, радовать тебя и просто быть рядом.</p>
+            <p class="sincere-highlight">Потому что ты мне действительно нравишься. ❤️</p>
+          </div>
+        </div>
+
+        <div id="sincere-step-3" class="sincere-block hidden-fade">
+          <p class="scene-question-prompt">А теперь ответь на один вопрос...</p>
+          <div class="spacer"></div>
+          <button id="btn-scene-6-next" class="btn btn-primary">
+            Задать вопрос &rarr;
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- SCENE 7 — INTERACTION QUESTION -->
+    <section id="scene-7" class="scene">
+      <div class="scene-content center">
+        <h2 class="question-title">Ты хотя бы немножко улыбнулась?</h2>
+
+        <div id="question-actions" class="question-buttons-container">
+          <button id="btn-yes" class="btn btn-yes">
+            😊 Да
+          </button>
+          <button id="btn-no" class="btn btn-no">
+            🥺 Нет
+          </button>
+        </div>
+
+        <!-- Answer YES response -->
+        <div id="response-yes" class="question-response hidden-fade">
+          <div class="response-icon">🥰</div>
+          <h2 class="response-headline">Фух.<br>Тогда я всё-таки не зря это сделал ❤️</h2>
+          <div class="spacer"></div>
+          <button id="btn-scene-7-next" class="btn btn-primary">
+            Дальше &rarr;
+          </button>
+        </div>
+
+        <!-- Answer NO response -->
+        <div id="response-no" class="question-response hidden-fade">
+          <div class="response-icon">🥺</div>
+          <h2 class="response-headline">Ну всё...<br>Придётся стараться ещё сильнее 😔</h2>
+          <div class="spacer"></div>
+          <button id="btn-retry" class="btn btn-secondary">
+            Попробовать ещё раз &rarr;
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- SCENE 8 — FINAL -->
+    <section id="scene-8" class="scene">
+      <div class="scene-content center final-scene-content">
+        <div class="final-card">
+          <p>Вот теперь всё.</p>
+          <p>Я просто хотел, чтобы ты знала, что мне действительно важно тебя радовать.</p>
+          <p>И что вчера я сказал не то, что хотел сказать.</p>
+          <p class="final-apology">Прости меня, зайка. ❤️</p>
+        </div>
+
+        <div class="final-headline-container">
+          <h1 class="final-wish">Хорошего тебе дня, зайка ❤️</h1>
+          <div class="final-pulsing-heart">💖</div>
+        </div>
+
+        <!-- Mini Teddy and Flowers illustration footer -->
+        <div class="final-illustration" id="teddy-scene-8" data-easter-egg="true">
+          <svg viewBox="0 0 200 120" width="180" height="108" aria-label="Мишка с цветами">
+            <!-- Small sitting bear -->
+            <g transform="translate(60, 10)">
+              <!-- Ears -->
+              <circle cx="25" cy="25" r="12" fill="#C49A76" />
+              <circle cx="55" cy="25" r="12" fill="#C49A76" />
+              <!-- Head -->
+              <circle cx="40" cy="40" r="26" fill="#B58862" />
+              <ellipse cx="40" cy="46" rx="13" ry="10" fill="#E6C4AA" />
+              <ellipse cx="40" cy="42" rx="5" ry="3.5" fill="#5C3A3E" />
+              <circle cx="30" cy="36" r="3" fill="#3D231E" />
+              <circle cx="50" cy="36" r="3" fill="#3D231E" />
+              <!-- Body -->
+              <path d="M 22 62 C 22 55, 58 55, 58 62 C 62 80, 58 95, 40 95 C 22 95, 18 80, 22 62 Z" fill="#B58862" />
+              <ellipse cx="40" cy="76" rx="13" ry="12" fill="#E6C4AA" />
+              <ellipse cx="22" cy="90" rx="9" ry="7" fill="#B58862" />
+              <ellipse cx="58" cy="90" rx="9" ry="7" fill="#B58862" />
+            </g>
+
+            <!-- Flowers beside bear -->
+            <g transform="translate(135, 40)">
+              <path d="M 10 50 L 10 20" stroke="#7AA37B" stroke-width="2.5" />
+              <path d="M 22 50 L 22 15" stroke="#689369" stroke-width="2.5" />
+              <circle cx="10" cy="18" r="8" fill="#F4A5A5" />
+              <circle cx="22" cy="13" r="7" fill="#D98880" />
+            </g>
+          </svg>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
