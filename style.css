@@ -1,5 +1,5 @@
 /* ==========================================================================
-   ALTYNAI ROMANTIC GREETING CARD - REFINED DESIGN SYSTEM & STYLES
+   ALTYNAI ROMANTIC GREETING CARD - BULLETPROOF DESIGN SYSTEM & STYLES
    ========================================================================== */
 
 /* --- CSS Variables & Color System --- */
@@ -34,7 +34,7 @@
   
   --transition-fast: 0.2s cubic-bezier(0.25, 1, 0.5, 1);
   --transition-smooth: 0.4s cubic-bezier(0.25, 1, 0.5, 1);
-  --transition-slow: 0.7s cubic-bezier(0.25, 1, 0.5, 1);
+  --transition-slow: 0.6s cubic-bezier(0.25, 1, 0.5, 1);
 }
 
 /* --- Global Reset & Foundation --- */
@@ -49,7 +49,7 @@ html, body {
   width: 100%;
   height: 100%;
   overflow: hidden;
-  background-color: #F4ECE4; /* Desktop framing */
+  background-color: #F4ECE4;
   color: var(--text-dark);
   font-family: var(--font-main);
   font-size: 16px;
@@ -69,7 +69,7 @@ html, body {
   z-index: 10;
 }
 
-/* --- App Container (Mobile Viewport & Desktop Centered Preview) --- */
+/* --- App Container --- */
 .app-container {
   position: relative;
   width: 100%;
@@ -82,21 +82,15 @@ html, body {
   overflow: hidden;
   display: flex;
   flex-direction: column;
-
-  /* Safe Area Insets for iOS Notch & Home Bar */
-  padding-top: env(safe-area-inset-top, 0px);
-  padding-bottom: env(safe-area-inset-bottom, 0px);
-  padding-left: env(safe-area-inset-left, 0px);
-  padding-right: env(safe-area-inset-right, 0px);
 }
 
-/* --- Subtle Progress Indicator --- */
+/* --- Progress Bar --- */
 .progress-bar-container {
   position: absolute;
   top: max(14px, env(safe-area-inset-top, 14px));
   left: 50%;
   transform: translateX(-50%);
-  width: 180px;
+  width: 160px;
   height: 3.5px;
   background: rgba(201, 122, 118, 0.15);
   border-radius: var(--radius-pill);
@@ -106,13 +100,13 @@ html, body {
 
 .progress-fill {
   height: 100%;
-  width: 12.5%; /* 1 of 8 scenes */
+  width: 12.5%;
   background: var(--primary-rose);
   border-radius: var(--radius-pill);
   transition: width var(--transition-smooth);
 }
 
-/* --- Scene State Engine --- */
+/* --- Scene State Management --- */
 .scene {
   position: absolute;
   inset: 0;
@@ -122,7 +116,7 @@ html, body {
   flex-direction: column;
   opacity: 0;
   visibility: hidden;
-  transform: translateY(10px) scale(0.985);
+  transform: translateY(8px) scale(0.99);
   transition: opacity var(--transition-slow), transform var(--transition-slow), visibility var(--transition-slow);
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
@@ -136,65 +130,27 @@ html, body {
   z-index: 2;
 }
 
-/* --- Mobile 9:16 Composition Grid --- */
+/* --- Centered Content Flow --- */
 .scene-content {
-  flex: 1;
+  min-height: 100%;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
   text-align: center;
+  padding: max(36px, calc(env(safe-area-inset-top, 0px) + 24px)) 22px max(30px, calc(env(safe-area-inset-bottom, 0px) + 20px)) 22px;
   width: 100%;
-  min-height: 100%;
-  padding: 40px 24px 28px 24px;
+  margin: auto 0;
 }
 
-.scene-top-spacer {
-  flex: 0.8;
-  min-height: 16px;
-}
-
-.scene-top-spacer.sm {
-  flex: 0.3;
-  min-height: 8px;
-}
-
-.scene-center {
-  flex: 4;
+/* --- Button Component --- */
+.btn-wrap {
+  width: 100%;
   display: flex;
-  flex-direction: column;
-  align-items: center;
   justify-content: center;
-  width: 100%;
+  margin-top: 22px;
 }
 
-.scene-center.scrollable-content {
-  justify-content: flex-start;
-  flex: 6;
-}
-
-.scene-bottom {
-  flex: 1;
-  display: flex;
-  align-items: flex-end;
-  justify-content: center;
-  width: 100%;
-  padding-bottom: max(10px, env(safe-area-inset-bottom, 10px));
-}
-
-.scene-bottom-inline {
-  margin-top: 24px;
-}
-
-.scene-bottom-spacer {
-  flex: 0.5;
-}
-
-.spacer-sm {
-  height: 16px;
-}
-
-/* --- Button Component System --- */
 .btn {
   display: inline-flex;
   align-items: center;
@@ -202,7 +158,7 @@ html, body {
   min-height: 52px;
   width: 100%;
   max-width: 280px;
-  padding: 14px 28px;
+  padding: 14px 26px;
   border-radius: var(--radius-pill);
   font-family: var(--font-main);
   font-size: 15.5px;
@@ -237,12 +193,13 @@ html, body {
   background-color: var(--bg-pink-soft);
 }
 
-/* --- Typography System --- */
+/* --- Typography --- */
 .scene-headline {
   font-size: 22px;
   font-weight: 700;
   color: var(--text-dark);
-  margin-bottom: 10px;
+  margin-top: 14px;
+  margin-bottom: 8px;
   line-height: 1.35;
   letter-spacing: -0.2px;
 }
@@ -263,7 +220,7 @@ html, body {
 .scene-note {
   font-size: 14.5px;
   color: var(--primary-rose);
-  margin-top: 14px;
+  margin-top: 12px;
   font-weight: 500;
   line-height: 1.6;
 }
@@ -311,22 +268,26 @@ html, body {
    ========================================================================== */
 .bunny-container {
   position: relative;
-  margin-bottom: 16px;
   cursor: pointer;
   user-select: none;
-  animation: bunny-breathe 4s infinite ease-in-out;
 }
 
 .bunny-group {
-  transform-origin: 100px 180px;
+  transform-box: fill-box;
+  transform-origin: center bottom;
+  animation: bunny-breathe 4s infinite ease-in-out;
   transition: transform var(--transition-smooth);
 }
 
 .bunny-ear.ear-left {
+  transform-box: fill-box;
+  transform-origin: bottom center;
   animation: ear-left-sway 5s infinite ease-in-out;
 }
 
 .bunny-ear.ear-right {
+  transform-box: fill-box;
+  transform-origin: bottom center;
   animation: ear-right-sway 4.5s infinite ease-in-out;
 }
 
@@ -334,7 +295,6 @@ html, body {
   transform: scale(1.05) rotate(2deg);
 }
 
-/* Eye Expressions for Easter Egg */
 .bunny-eye-state {
   display: none;
 }
@@ -363,7 +323,7 @@ html, body {
   box-shadow: var(--shadow-card);
   border: 1px solid rgba(230, 209, 199, 0.6);
   width: 100%;
-  max-height: 64dvh;
+  max-height: 60dvh;
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
   text-align: left;
@@ -394,36 +354,28 @@ html, body {
 }
 
 /* ==========================================================================
-   SCENE 4 — FLOWERS (REDESIGNED BOUQUET)
+   SCENE 4 — FLOWERS
    ========================================================================== */
 .bouquet-wrapper {
-  margin-bottom: 12px;
+  margin-bottom: 6px;
 }
 
-/* Staggered Bouquet Blooming Animations */
-.b-stem {
-  transform-origin: 130px 185px;
-  animation: stem-grow 1s ease-out forwards;
-}
-
-.b-leaf {
-  transform-origin: 130px 150px;
-  animation: leaf-unfurl 1.2s ease-out forwards;
-  opacity: 0;
-  animation-delay: 0.3s;
+.b-wrap, .b-stems, .b-flowers {
+  transform-box: fill-box;
 }
 
 .b-flower {
+  transform-box: fill-box;
   transform-origin: center bottom;
   animation: flower-bloom 0.9s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
   opacity: 0;
 }
 
-.f-tulip-left   { animation-delay: 0.35s; }
-.f-tulip-right  { animation-delay: 0.55s; }
-.f-rose-left    { animation-delay: 0.75s; }
-.f-flower-right { animation-delay: 0.95s; }
-.f-rose-center  { animation-delay: 1.15s; }
+.f-1 { animation-delay: 0.25s; }
+.f-2 { animation-delay: 0.45s; }
+.f-3 { animation-delay: 0.65s; }
+.f-4 { animation-delay: 0.85s; }
+.f-5 { animation-delay: 1.05s; }
 
 /* ==========================================================================
    SCENE 5 — GIFT
@@ -486,18 +438,18 @@ html, body {
   transform: translateY(-42px) rotate(-16deg);
 }
 
-.gift-text-block {
+.gift-text-container {
   margin-top: 14px;
   width: 100%;
 }
 
 .mini-bunny-reveal {
-  margin-bottom: 12px;
+  margin-bottom: 8px;
   animation: pop-bounce 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
 .mini-bunny-icon {
-  font-size: 50px;
+  font-size: 48px;
   display: inline-block;
 }
 
@@ -506,8 +458,7 @@ html, body {
    ========================================================================== */
 .sincere-block {
   width: 100%;
-  margin-bottom: 16px;
-  transition: opacity var(--transition-slow), transform var(--transition-slow);
+  margin-bottom: 14px;
 }
 
 .sincere-card {
@@ -539,7 +490,7 @@ html, body {
 }
 
 /* ==========================================================================
-   SCENE 7 — INTERACTION QUESTION
+   SCENE 7 — QUESTION
    ========================================================================== */
 .question-title {
   font-size: 23px;
@@ -557,7 +508,7 @@ html, body {
   max-width: 300px;
   justify-content: center;
   position: relative;
-  min-height: 70px;
+  min-height: 60px;
 }
 
 .btn-yes {
@@ -605,7 +556,7 @@ html, body {
   border-radius: var(--radius-md);
   box-shadow: var(--shadow-card);
   border: 1px solid rgba(230, 209, 199, 0.6);
-  margin-bottom: 20px;
+  margin-bottom: 18px;
   text-align: left;
   width: 100%;
 }
@@ -623,7 +574,7 @@ html, body {
 }
 
 .final-wish-container {
-  margin-bottom: 16px;
+  margin-bottom: 14px;
 }
 
 .final-wish {
@@ -645,7 +596,7 @@ html, body {
   cursor: pointer;
 }
 
-/* --- TOAST NOTIFICATION FOR EASTER EGG --- */
+/* --- TOAST NOTIFICATION --- */
 .toast {
   position: absolute;
   top: max(60px, calc(env(safe-area-inset-top, 0px) + 50px));
@@ -674,15 +625,20 @@ html, body {
 .hidden-fade {
   display: none !important;
   opacity: 0;
-  transition: opacity var(--transition-slow);
 }
 
 .hidden-fade.show {
   display: block !important;
   opacity: 1;
+  animation: fade-in 0.5s ease-out forwards;
 }
 
 /* --- KEYFRAME ANIMATIONS --- */
+@keyframes fade-in {
+  0% { opacity: 0; transform: translateY(6px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
 @keyframes heart-breathe {
   0%, 100% { transform: scale(1); }
   50% { transform: scale(1.18); }
@@ -700,22 +656,12 @@ html, body {
 
 @keyframes ear-left-sway {
   0%, 100% { transform: rotate(0deg); }
-  50% { transform: rotate(-3.5deg); }
+  50% { transform: rotate(-3deg); }
 }
 
 @keyframes ear-right-sway {
   0%, 100% { transform: rotate(0deg); }
-  50% { transform: rotate(3.5deg); }
-}
-
-@keyframes stem-grow {
-  0% { stroke-dasharray: 200; stroke-dashoffset: 200; opacity: 0; }
-  100% { stroke-dasharray: 200; stroke-dashoffset: 0; opacity: 1; }
-}
-
-@keyframes leaf-unfurl {
-  0% { transform: scale(0.3); opacity: 0; }
-  100% { transform: scale(1); opacity: 0.9; }
+  50% { transform: rotate(3deg); }
 }
 
 @keyframes flower-bloom {
@@ -744,7 +690,7 @@ html, body {
   45% { transform: scale(1.15); }
 }
 
-/* --- ACCESSIBILITY: PREFERS-REDUCED-MOTION --- */
+/* --- ACCESSIBILITY --- */
 @media (prefers-reduced-motion: reduce) {
   *, ::before, ::after {
     animation-duration: 0.01ms !important;
