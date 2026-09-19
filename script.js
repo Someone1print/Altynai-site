@@ -385,8 +385,8 @@ document.addEventListener('DOMContentLoaded', () => {
         popReactionBubble(bunnyEl, '🥰');
       } else if (easterEggTapCount >= 4) {
         setBunnyExpression('hearts');
-        popReactionBubble(bunnyEl, '😂❤️');
-        showToast('Ну всё, хватит меня тыкать 😂❤️');
+        popReactionBubble(bunnyEl, '❤️');
+        showToast('Ну всё, хватит меня тыкать ❤️');
         easterEggTapCount = 0;
         setTimeout(() => setBunnyExpression('normal'), 4000);
       }
