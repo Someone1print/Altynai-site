@@ -145,54 +145,52 @@
       </div>
     </section>
 
-    <!-- ==================== SCENE 4 — FLOWERS (REALISTIC BEAUTIFUL BOUQUET) ==================== -->
+    <!-- ==================== SCENE 4 — FLOWERS (BEAUTIFUL REFINED BOTANICAL BOUQUET) ==================== -->
     <section id="scene-4" class="scene">
       <div class="scene-content">
         <div class="bouquet-wrapper">
           <svg class="bouquet-svg" viewBox="0 0 280 300" width="240" height="257" aria-label="Роскошный нежный букет">
             <defs>
-              <!-- Tulip Gradient -->
-              <linearGradient id="tulipPetalL" x1="0%" y1="0%" x2="100%" y2="100%">
-                <stop offset="0%" stop-color="#FFD6D0" />
-                <stop offset="60%" stop-color="#F29E97" />
+              <!-- Soft Tulip Gradients -->
+              <linearGradient id="tulipLeft" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#FFDCD6" />
+                <stop offset="50%" stop-color="#F7A7A0" />
                 <stop offset="100%" stop-color="#D9726A" />
               </linearGradient>
-              <linearGradient id="tulipPetalR" x1="100%" y1="0%" x2="0%" y2="100%">
-                <stop offset="0%" stop-color="#FFD6D0" />
-                <stop offset="60%" stop-color="#F29E97" />
+              <linearGradient id="tulipRight" x1="100%" y1="0%" x2="0%" y2="100%">
+                <stop offset="0%" stop-color="#FFDCD6" />
+                <stop offset="50%" stop-color="#F7A7A0" />
                 <stop offset="100%" stop-color="#D9726A" />
               </linearGradient>
-              <linearGradient id="tulipPetalC" x1="50%" y1="0%" x2="50%" y2="100%">
-                <stop offset="0%" stop-color="#FFF0EE" />
-                <stop offset="70%" stop-color="#F8B1AB" />
+              <linearGradient id="tulipCenter" x1="50%" y1="0%" x2="50%" y2="100%">
+                <stop offset="0%" stop-color="#FFF2F0" />
+                <stop offset="60%" stop-color="#F8B6B0" />
                 <stop offset="100%" stop-color="#E27F78" />
               </linearGradient>
-              <!-- Rose Gradient -->
-              <radialGradient id="roseRadial" cx="50%" cy="40%" r="60%">
-                <stop offset="0%" stop-color="#FFF5F3" />
-                <stop offset="40%" stop-color="#F7BBB5" />
-                <stop offset="75%" stop-color="#E2867F" />
-                <stop offset="100%" stop-color="#B85953" />
+              <!-- Delicate Rose Gradient -->
+              <radialGradient id="roseGlow" cx="45%" cy="40%" r="60%">
+                <stop offset="0%" stop-color="#FFF8F6" />
+                <stop offset="35%" stop-color="#FAD2CD" />
+                <stop offset="70%" stop-color="#F09B93" />
+                <stop offset="100%" stop-color="#C96860" />
               </radialGradient>
-              <!-- Wrap Craft Gradient -->
-              <linearGradient id="craftWrap" x1="0%" y1="0%" x2="100%" y2="100%">
-                <stop offset="0%" stop-color="#FFF2ED" />
-                <stop offset="50%" stop-color="#F5DDD3" />
+              <!-- Paper Wrap Gradient -->
+              <linearGradient id="wrapPaper" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#FFF5F0" />
+                <stop offset="50%" stop-color="#F7E2D8" />
                 <stop offset="100%" stop-color="#E8C5B8" />
               </linearGradient>
             </defs>
 
             <!-- Kraft Wrapping & Satin Ribbon Layer -->
             <g class="b-wrap-group">
-              <!-- Wrapping Paper Body -->
-              <path d="M 80 290 L 110 185 C 110 185 140 175 170 185 L 200 290 C 160 298 120 298 80 290 Z" fill="url(#craftWrap)" stroke="#DEC0B3" stroke-width="1.5" />
-              <!-- Wrap folds -->
+              <!-- Paper Wrap Body -->
+              <path d="M 80 290 L 110 185 C 110 185 140 175 170 185 L 200 290 C 160 298 120 298 80 290 Z" fill="url(#wrapPaper)" stroke="#DEC0B3" stroke-width="1.5" />
               <path d="M 95 195 L 140 292" stroke="#D1B0A2" stroke-width="1.2" fill="none" opacity="0.6" />
               <path d="M 185 195 L 140 292" stroke="#D1B0A2" stroke-width="1.2" fill="none" opacity="0.6" />
               
-              <!-- Ribbon Band & Bow -->
+              <!-- Ribbon Bow -->
               <path d="M 102 205 Q 140 216 178 205" fill="none" stroke="#C97A76" stroke-width="3.5" stroke-linecap="round" />
-              <!-- Ribbon Bow Loops -->
               <path d="M 125 208 C 108 198, 108 220, 128 212 Z" fill="#C97A76" />
               <path d="M 155 208 C 172 198, 172 220, 152 212 Z" fill="#C97A76" />
               <circle cx="140" cy="210" r="5" fill="#A85753" />
@@ -200,9 +198,8 @@
               <path d="M 144 214 Q 150 230 154 242" stroke="#C97A76" stroke-width="2.5" fill="none" stroke-linecap="round" />
             </g>
 
-            <!-- Stems & Foliage Layer -->
+            <!-- Foliage & Stems Layer -->
             <g class="b-foliage-group">
-              <!-- Natural Stems -->
               <path d="M 140 205 Q 115 150 90 100" stroke="#7E9F82" stroke-width="3.8" fill="none" stroke-linecap="round" />
               <path d="M 140 205 Q 138 135 140 70" stroke="#688F6D" stroke-width="4.2" fill="none" stroke-linecap="round" />
               <path d="M 140 205 Q 165 150 190 105" stroke="#7E9F82" stroke-width="3.8" fill="none" stroke-linecap="round" />
@@ -215,7 +212,7 @@
               <path d="M 135 130 Q 160 115 175 90 Q 152 108 135 130 Z" fill="#7E9F82" opacity="0.85" />
               <path d="M 110 135 Q 85 120 70 95 Q 92 112 110 135 Z" fill="#688F6D" opacity="0.85" />
               
-              <!-- Eucalyptus Sprig with round silver-green leaves -->
+              <!-- Eucalyptus Sprigs -->
               <g transform="translate(48, 120)">
                 <path d="M 15 25 L 0 0" stroke="#8CAE90" stroke-width="2" />
                 <ellipse cx="0" cy="2" rx="7" ry="5" fill="#8CAE90" transform="rotate(-20 0 2)" />
@@ -228,99 +225,98 @@
               </g>
             </g>
 
-            <!-- Realistic Flower Blossoms Layer -->
+            <!-- Refined Botanical Flower Blossoms -->
             <g class="b-flowers-group">
               
-              <!-- 1. LEFT TULIP (Multi-petal realistic cup) -->
+              <!-- 1. LEFT FLOWER: Tender Tulip Bud -->
               <g transform="translate(60, 130)">
                 <g class="flower-anim">
-                  <!-- Back petal -->
-                  <path d="M 0 0 C -8 -20, 8 -20, 0 0 Z" fill="#D9726A" />
-                  <!-- Left side petal -->
-                  <path d="M 0 0 C -22 -15, -20 -40, -4 -46 C 4 -35, 6 -15, 0 0 Z" fill="url(#tulipPetalL)" />
-                  <!-- Right side petal -->
-                  <path d="M 0 0 C 22 -15, 20 -40, 4 -46 C -4 -35, -6 -15, 0 0 Z" fill="url(#tulipPetalR)" />
-                  <!-- Center front petal -->
-                  <path d="M 0 0 C -12 -18, -14 -44, 0 -48 C 14 -44, 12 -18, 0 0 Z" fill="url(#tulipPetalC)" />
-                  <!-- Petal light sheen -->
-                  <path d="M 0 -2 C -4 -16, -6 -35, 0 -42 C 6 -35, 4 -16, 0 -2 Z" fill="#FFFFFF" opacity="0.45" />
+                  <!-- Back petals -->
+                  <path d="M 0 0 C -12 -15, -10 -35, 0 -38 C 10 -35, 12 -15, 0 0 Z" fill="#C96860" />
+                  <!-- Outer Left Petal -->
+                  <path d="M 0 0 C -20 -12, -18 -36, -3 -42 C 4 -32, 6 -14, 0 0 Z" fill="url(#tulipLeft)" />
+                  <!-- Outer Right Petal -->
+                  <path d="M 0 0 C 20 -12, 18 -36, 3 -42 C -4 -32, -6 -14, 0 0 Z" fill="url(#tulipRight)" />
+                  <!-- Center Heart Petal -->
+                  <path d="M 0 0 C -10 -15, -11 -40, 0 -44 C 11 -40, 10 -15, 0 0 Z" fill="url(#tulipCenter)" />
+                  <path d="M 0 -2 C -3 -15, -4 -32, 0 -38 C 4 -32, 3 -15, 0 -2 Z" fill="#FFFFFF" opacity="0.5" />
                 </g>
               </g>
 
-              <!-- 2. RIGHT TULIP (Gently angled bloom) -->
+              <!-- 2. RIGHT FLOWER: Tender Tulip Bud -->
               <g transform="translate(220, 130)">
                 <g class="flower-anim">
-                  <!-- Back petal -->
-                  <path d="M 0 0 C -8 -20, 8 -20, 0 0 Z" fill="#D9726A" />
-                  <!-- Left side petal -->
-                  <path d="M 0 0 C -22 -15, -20 -40, -4 -46 C 4 -35, 6 -15, 0 0 Z" fill="url(#tulipPetalL)" />
-                  <!-- Right side petal -->
-                  <path d="M 0 0 C 22 -15, 20 -40, 4 -46 C -4 -35, -6 -15, 0 0 Z" fill="url(#tulipPetalR)" />
-                  <!-- Center front petal -->
-                  <path d="M 0 0 C -12 -18, -14 -44, 0 -48 C 14 -44, 12 -18, 0 0 Z" fill="url(#tulipPetalC)" />
-                  <path d="M 0 -2 C -4 -16, -6 -35, 0 -42 C 6 -35, 4 -16, 0 -2 Z" fill="#FFFFFF" opacity="0.45" />
+                  <!-- Back petals -->
+                  <path d="M 0 0 C -12 -15, -10 -35, 0 -38 C 10 -35, 12 -15, 0 0 Z" fill="#C96860" />
+                  <!-- Outer Left Petal -->
+                  <path d="M 0 0 C -20 -12, -18 -36, -3 -42 C 4 -32, 6 -14, 0 0 Z" fill="url(#tulipLeft)" />
+                  <!-- Outer Right Petal -->
+                  <path d="M 0 0 C 20 -12, 18 -36, 3 -42 C -4 -32, -6 -14, 0 0 Z" fill="url(#tulipRight)" />
+                  <!-- Center Heart Petal -->
+                  <path d="M 0 0 C -10 -15, -11 -40, 0 -44 C 11 -40, 10 -15, 0 0 Z" fill="url(#tulipCenter)" />
+                  <path d="M 0 -2 C -3 -15, -4 -32, 0 -38 C 4 -32, 3 -15, 0 -2 Z" fill="#FFFFFF" opacity="0.5" />
                 </g>
               </g>
 
-              <!-- 3. MID-LEFT ENGLISH ROSE (Concentric layered petals) -->
+              <!-- 3. MID-LEFT FLOWER: Delicate English Rosebud -->
               <g transform="translate(95, 95)">
                 <g class="flower-anim">
-                  <!-- Outer wide petals -->
-                  <circle cx="0" cy="0" r="22" fill="#FCE5E2" />
-                  <path d="M -18 5 C -25 -10, -10 -25, 0 -22 C 10 -25, 25 -10, 18 5 C 10 22, -10 22, -18 5 Z" fill="#F8BCB5" />
-                  <!-- Middle layered cup petals -->
-                  <path d="M -14 -5 C -18 -18, 0 -22, 12 -14 C 18 2, 2 18, -10 12 Z" fill="#EFA097" />
-                  <path d="M 14 -5 C 18 -18, 0 -22, -12 -14 C -18 2, -2 18, 10 12 Z" fill="#E8887F" />
-                  <!-- Inner rose swirl -->
-                  <circle cx="0" cy="0" r="12" fill="url(#roseRadial)" />
-                  <path d="M -6 -4 C -8 -11, 8 -11, 6 -4 C 4 3, -4 3, -6 -4 Z" fill="#FFF0EE" opacity="0.9" />
-                  <circle cx="0" cy="-2" r="4.5" fill="#A84E48" />
+                  <!-- Calyx & Outer petals -->
+                  <ellipse cx="0" cy="0" rx="19" ry="17" fill="#FCE5E2" />
+                  <path d="M -15 2 C -22 -10, -8 -22, 0 -20 C 8 -22, 22 -10, 15 2 C 8 18, -8 18, -15 2 Z" fill="#F8B6AF" />
+                  <!-- Swirling petals -->
+                  <path d="M -12 -4 C -16 -15, 0 -18, 10 -11 C 15 3, 2 15, -8 10 Z" fill="#F09890" />
+                  <path d="M 12 -4 C 16 -15, 0 -18, -10 -11 C -15 3, -2 15, 8 10 Z" fill="#E68278" />
+                  <!-- Inner center -->
+                  <circle cx="0" cy="-1" r="9" fill="url(#roseGlow)" />
+                  <path d="M -5 -3 C -7 -9, 7 -9, 5 -3 C 3 2, -3 2, -5 -3 Z" fill="#FFF0EE" opacity="0.9" />
+                  <circle cx="0" cy="-1" r="3.5" fill="#A84E48" />
                 </g>
               </g>
 
-              <!-- 4. MID-RIGHT DAISY / WILDFLOWER (Delicate textured petals) -->
+              <!-- 4. MID-RIGHT FLOWER: Daisy / Wildflower with Golden Heart -->
               <g transform="translate(185, 100)">
                 <g class="flower-anim">
-                  <!-- Radiating oval petals -->
-                  <g fill="#FFF8F6" stroke="#F4C2BA" stroke-width="0.8">
-                    <ellipse cx="0" cy="-16" rx="5" ry="9" />
-                    <ellipse cx="11" cy="-11" rx="5" ry="9" transform="rotate(45 11 -11)" />
-                    <ellipse cx="16" cy="0" rx="9" ry="5" />
-                    <ellipse cx="11" cy="11" rx="5" ry="9" transform="rotate(-45 11 11)" />
-                    <ellipse cx="0" cy="16" rx="5" ry="9" />
-                    <ellipse cx="-11" cy="11" rx="5" ry="9" transform="rotate(45 -11 11)" />
-                    <ellipse cx="-16" cy="0" rx="9" ry="5" />
-                    <ellipse cx="-11" cy="-11" rx="5" ry="9" transform="rotate(-45 -11 -11)" />
+                  <!-- Radiating delicate petals -->
+                  <g fill="#FFF9F7" stroke="#F4C2BA" stroke-width="0.8">
+                    <ellipse cx="0" cy="-15" rx="4.5" ry="8" />
+                    <ellipse cx="10.5" cy="-10.5" rx="4.5" ry="8" transform="rotate(45 10.5 -10.5)" />
+                    <ellipse cx="15" cy="0" rx="8" ry="4.5" />
+                    <ellipse cx="10.5" cy="10.5" rx="4.5" ry="8" transform="rotate(-45 10.5 10.5)" />
+                    <ellipse cx="0" cy="15" rx="4.5" ry="8" />
+                    <ellipse cx="-10.5" cy="10.5" rx="4.5" ry="8" transform="rotate(45 -10.5 10.5)" />
+                    <ellipse cx="-15" cy="0" rx="8" ry="4.5" />
+                    <ellipse cx="-10.5" cy="-10.5" rx="4.5" ry="8" transform="rotate(-45 -10.5 -10.5)" />
                   </g>
-                  <!-- Golden center disk with warm texture -->
-                  <circle cx="0" cy="0" r="8.5" fill="#E8B065" />
-                  <circle cx="0" cy="0" r="6.5" fill="#FCD78E" />
-                  <circle cx="-2" cy="-2" r="1.5" fill="#FFF6D8" />
+                  <!-- Warm golden center -->
+                  <circle cx="0" cy="0" r="8" fill="#E8B065" />
+                  <circle cx="0" cy="0" r="6" fill="#FCD78E" />
+                  <circle cx="-2" cy="-2" r="1.4" fill="#FFF6D8" />
                 </g>
               </g>
 
-              <!-- 5. MAIN TOP CENTER PEONY / ROSE (Lush full blossom) -->
+              <!-- 5. MAIN TOP CENTER FLOWER: Elegant Blooming Peony/Rose -->
               <g transform="translate(140, 68)">
                 <g class="flower-anim">
-                  <!-- Outer large ruffled petals -->
-                  <circle cx="0" cy="0" r="26" fill="#FDECE9" />
-                  <path d="M -22 6 C -30 -12, -12 -30, 0 -27 C 12 -30, 30 -12, 22 6 C 12 26, -12 26, -22 6 Z" fill="#F7B8B1" />
-                  <!-- Middle scallop petals -->
-                  <circle cx="-12" cy="-8" r="14" fill="#F29E96" opacity="0.9" />
-                  <circle cx="12" cy="-8" r="14" fill="#F29E96" opacity="0.9" />
-                  <circle cx="0" cy="10" r="14" fill="#E8857B" opacity="0.9" />
-                  <!-- Inner heart of peony -->
-                  <circle cx="0" cy="0" r="14" fill="url(#roseRadial)" />
-                  <path d="M -7 -4 C -10 -12, 10 -12, 7 -4 C 4 4, -4 4, -7 -4 Z" fill="#FFFFFF" opacity="0.95" />
-                  <circle cx="0" cy="-2" r="5" fill="#9C403A" />
+                  <!-- Outer wide petals -->
+                  <ellipse cx="0" cy="0" rx="23" ry="21" fill="#FDECE9" />
+                  <path d="M -19 4 C -26 -10, -10 -26, 0 -23 C 10 -26, 26 -10, 19 4 C 10 22, -10 22, -19 4 Z" fill="#F7B2AA" />
+                  <!-- Middle scallop layers -->
+                  <circle cx="-10" cy="-6" r="12" fill="#F29A91" opacity="0.9" />
+                  <circle cx="10" cy="-6" r="12" fill="#F29A91" opacity="0.9" />
+                  <circle cx="0" cy="8" r="12" fill="#E88277" opacity="0.9" />
+                  <!-- Inner heart -->
+                  <circle cx="0" cy="0" r="12" fill="url(#roseGlow)" />
+                  <path d="M -6 -3 C -9 -10, 9 -10, 6 -3 C 3 3, -3 3, -6 -3 Z" fill="#FFFFFF" opacity="0.95" />
+                  <circle cx="0" cy="-1" r="4" fill="#9C403A" />
                 </g>
               </g>
 
-              <!-- Pastel Berry Accents -->
-              <circle cx="68" cy="88" r="4.5" fill="#D9726A" />
-              <circle cx="76" cy="80" r="3.8" fill="#F29E96" />
-              <circle cx="212" cy="85" r="4.5" fill="#D9726A" />
-              <circle cx="220" cy="93" r="3.8" fill="#F29E96" />
+              <!-- Pastel Berry Sprigs -->
+              <circle cx="68" cy="88" r="4" fill="#D9726A" />
+              <circle cx="76" cy="80" r="3.5" fill="#F29E96" />
+              <circle cx="212" cy="85" r="4" fill="#D9726A" />
+              <circle cx="220" cy="93" r="3.5" fill="#F29E96" />
             </g>
           </svg>
         </div>
@@ -429,10 +425,10 @@
 
         <div id="sincere-step-2" class="sincere-block hidden-fade">
           <div class="sincere-card">
-            <p>Я не хочу портить то хорошее, что между нами есть из-за одной глупости.</p>
-            <p>Я правда постараюсь больше думать перед тем, как что-то говорить.</p>
-            <p>Мне хочется продолжать узнавать тебя, радовать тебя и просто быть рядом.</p>
-            <p class="sincere-highlight">Потому что ты мне действительно нравишься. ❤️</p>
+            <p class="sincere-line line-1">Я не хочу портить то хорошее, что между нами есть из-за одной глупости.</p>
+            <p class="sincere-line line-2">Я правда постараюсь больше думать перед тем, как что-то говорить.</p>
+            <p class="sincere-line line-3">Мне хочется продолжать узнавать тебя, радовать тебя и просто быть рядом.</p>
+            <p class="sincere-line line-4 sincere-highlight">Потому что ты мне действительно нравишься. ❤️</p>
           </div>
         </div>
 
@@ -485,35 +481,38 @@
       </div>
     </section>
 
-    <!-- ==================== SCENE 8 — FINAL ==================== -->
+    <!-- ==================== SCENE 8 — FINAL (UPDATED TEXT & RICH FLOWERS) ==================== -->
     <section id="scene-8" class="scene">
       <div class="scene-content">
         <div class="final-card">
-          <p>Вот теперь всё.</p>
-          <p>Я просто хотел, чтобы ты знала, что мне действительно важно тебя радовать.</p>
-          <p>И что вчера я сказал не то, что хотел сказать.</p>
-          <p class="final-apology">Прости меня, зайка. ❤️</p>
+          <p>Ну вот и всё.</p>
+          <p>Я просто хотел сказать, что ты для меня очень важна, ценна, и я очень дорожу тем общением, что у нас с тобой есть.</p>
+          <p class="final-highlight">И вчера я сделал глупость, за которую очень сильно жалею, и я правда осознал и буду стараться становиться только лучше.</p>
         </div>
 
         <div class="final-wish-container">
-          <h1 class="final-wish">Хорошего тебе дня, зайка ❤️</h1>
+          <h1 class="final-wish">Хорошего тебе дня, зайка, и удачи ❤️</h1>
           <div class="final-pulsing-heart">💖</div>
         </div>
 
-        <!-- Sitting Bunny Illustration with Flowers -->
+        <!-- Sitting Bunny with Rich Blooming Flowers Illustration -->
         <div class="final-illustration" id="bunny-scene-8" data-easter-egg="true">
-          <svg viewBox="0 0 220 130" width="190" height="112" aria-label="Зайка с цветами">
-            <g transform="translate(60, 8)">
+          <svg viewBox="0 0 240 135" width="210" height="118" aria-label="Зайка с красивыми цветами">
+            <!-- Sitting Bunny -->
+            <g transform="translate(50, 10)">
+              <!-- Ears -->
               <path d="M 28 40 C 15 20, 10 5, 22 2 C 32 -1, 35 18, 33 40 Z" fill="#FAF6F0" stroke="#EFE8DE" stroke-width="1.2" />
               <path d="M 26 35 C 18 20, 14 8, 22 6 C 29 4, 31 18, 30 35 Z" fill="#F7D0CB" opacity="0.8" />
               <path d="M 52 40 C 65 20, 70 5, 58 2 C 48 -1, 45 18, 47 40 Z" fill="#FAF6F0" stroke="#EFE8DE" stroke-width="1.2" />
               <path d="M 54 35 C 62 20, 66 8, 58 6 C 51 4, 49 18, 50 35 Z" fill="#F7D0CB" opacity="0.8" />
 
+              <!-- Body -->
               <ellipse cx="40" cy="78" rx="26" ry="24" fill="#FAF6F0" stroke="#EFE8DE" stroke-width="1.2" />
               <ellipse cx="40" cy="80" rx="16" ry="14" fill="#FFFDF9" />
               <ellipse cx="25" cy="98" rx="12" ry="8" fill="#FAF6F0" stroke="#EFE8DE" stroke-width="1.2" />
               <ellipse cx="55" cy="98" rx="12" ry="8" fill="#FAF6F0" stroke="#EFE8DE" stroke-width="1.2" />
 
+              <!-- Head -->
               <ellipse cx="40" cy="46" rx="24" ry="20" fill="#FAF6F0" stroke="#EFE8DE" stroke-width="1.2" />
               <ellipse cx="28" cy="50" rx="5" ry="3" fill="#F4A5A5" opacity="0.55" />
               <ellipse cx="52" cy="50" rx="5" ry="3" fill="#F4A5A5" opacity="0.55" />
@@ -525,13 +524,47 @@
               <path d="M 38 51 Q 40 53 42 51" fill="none" stroke="#4A3437" stroke-width="1.2" stroke-linecap="round" />
             </g>
 
-            <g transform="translate(140, 45)">
-              <path d="M 10 65 Q 12 35 15 15" stroke="#7E9F82" stroke-width="2.5" fill="none" />
-              <path d="M 26 65 Q 24 35 20 18" stroke="#6E9072" stroke-width="2.5" fill="none" />
-              <!-- Tulip blossom -->
-              <path d="M 7 15 C 2 7, 7 0, 15 -2 C 23 0, 28 7, 23 15 Z" fill="#E08E88" />
-              <path d="M 12 18 C 8 10, 12 4, 20 2 C 28 4, 32 10, 28 18 Z" fill="#F2B5B0" />
-              <circle cx="38" cy="30" r="5.5" fill="#E8B878" />
+            <!-- Rich Little Garden Flower Patch Beside Bunny -->
+            <g transform="translate(135, 40)">
+              <!-- Stems -->
+              <path d="M 10 70 Q 12 38 14 16" stroke="#7E9F82" stroke-width="2.5" fill="none" />
+              <path d="M 28 70 Q 26 38 24 20" stroke="#688F6D" stroke-width="2.5" fill="none" />
+              <path d="M 45 70 Q 42 45 38 30" stroke="#7E9F82" stroke-width="2.2" fill="none" />
+              
+              <!-- Leaves -->
+              <path d="M 12 50 Q 2 45 0 35 Q 10 40 12 50 Z" fill="#7E9F82" />
+              <path d="M 26 45 Q 36 40 38 30 Q 28 35 26 45 Z" fill="#688F6D" />
+
+              <!-- 1. Little Rose Blossom -->
+              <g transform="translate(14, 14)">
+                <circle cx="0" cy="0" r="11" fill="#FCE5E2" />
+                <path d="M -9 2 C -12 -5, -4 -12, 0 -11 C 4 -12, 12 -5, 9 2 C 5 10, -5 10, -9 2 Z" fill="#F8B1AA" />
+                <circle cx="0" cy="-1" r="5.5" fill="#E88075" />
+                <circle cx="0" cy="-1" r="2.5" fill="#9E3E38" />
+              </g>
+
+              <!-- 2. Tender Tulip Cup -->
+              <g transform="translate(26, 18)">
+                <path d="M 0 0 C -10 -8, -8 -22, -1 -25 C 2 -18, 3 -8, 0 0 Z" fill="#F7A7A0" />
+                <path d="M 0 0 C 10 -8, 8 -22, 1 -25 C -2 -18, -3 -8, 0 0 Z" fill="#D9726A" />
+                <path d="M 0 0 C -5 -8, -6 -24, 0 -26 C 6 -24, 5 -8, 0 0 Z" fill="#FFF0EE" />
+              </g>
+
+              <!-- 3. Little Golden Daisy -->
+              <g transform="translate(40, 28)">
+                <g fill="#FFFDF9" stroke="#F4C0B8" stroke-width="0.6">
+                  <ellipse cx="0" cy="-8" rx="2.5" ry="4.5" />
+                  <ellipse cx="6" cy="-6" rx="2.5" ry="4.5" transform="rotate(45 6 -6)" />
+                  <ellipse cx="8" cy="0" rx="4.5" ry="2.5" />
+                  <ellipse cx="6" cy="6" rx="2.5" ry="4.5" transform="rotate(-45 6 6)" />
+                  <ellipse cx="0" cy="8" rx="2.5" ry="4.5" />
+                  <ellipse cx="-6" cy="6" rx="2.5" ry="4.5" transform="rotate(45 -6 6)" />
+                  <ellipse cx="-8" cy="0" rx="4.5" ry="2.5" />
+                  <ellipse cx="-6" cy="-6" rx="2.5" ry="4.5" transform="rotate(-45 -6 -6)" />
+                </g>
+                <circle cx="0" cy="0" r="4.2" fill="#E8B065" />
+                <circle cx="0" cy="0" r="2.8" fill="#FCD78E" />
+              </g>
             </g>
           </svg>
         </div>

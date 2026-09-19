@@ -209,16 +209,12 @@ document.addEventListener('DOMContentLoaded', () => {
   function triggerSincereMessageSequence() {
     const step2 = document.getElementById('sincere-step-2');
     const step3 = document.getElementById('sincere-step-3');
-    const btnScene6 = document.getElementById('btn-scene-6-next');
 
     if (step2) {
-      setTimeout(() => step2.classList.add('show'), 900);
+      setTimeout(() => step2.classList.add('show'), 700);
     }
     if (step3) {
-      setTimeout(() => step3.classList.add('show'), 2200);
-    }
-    if (btnScene6) {
-      setTimeout(() => btnScene6.classList.add('show'), 2600);
+      setTimeout(() => step3.classList.add('show'), 3300);
     }
   }
 
