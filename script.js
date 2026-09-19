@@ -8,6 +8,7 @@ document.addEventListener('DOMContentLoaded', () => {
   let currentScene = 1;
   const totalScenes = 8;
   let easterEggTapCount = 0;
+  let scene6Timers = [];
 
   // DOM Elements
   const progressFill = document.getElementById('progress-fill');
@@ -78,7 +79,6 @@ document.addEventListener('DOMContentLoaded', () => {
         ctx.closePath();
         ctx.fill();
       } else {
-        // Soft organic flower petal shape
         ctx.beginPath();
         ctx.ellipse(0, 0, this.size / 1.8, this.size / 3.2, 0, 0, Math.PI * 2);
         ctx.fill();
@@ -157,14 +157,14 @@ document.addEventListener('DOMContentLoaded', () => {
       if (bouquet) {
         bouquet.style.display = 'none';
         void bouquet.offsetWidth;
-        bouquet.style.display = 'block';
+        bouquet.style.display = 'flex';
       }
     } else if (sceneNum === 6) {
       triggerSincereMessageSequence();
     } else if (sceneNum === 7) {
       resetQuestionState();
     } else if (sceneNum === 8) {
-      spawnBurst(window.innerWidth / 2, window.innerHeight * 0.4, 40);
+      spawnBurst(window.innerWidth / 2, window.innerHeight * 0.38, 40);
     }
   }
 
@@ -172,7 +172,7 @@ document.addEventListener('DOMContentLoaded', () => {
   document.getElementById('btn-scene-1-next')?.addEventListener('click', () => goToScene(2));
 
   document.getElementById('btn-scene-2-next')?.addEventListener('click', () => {
-    // Animate bunny head tilt and paw forward before transitioning
+    // Bunny leans forward happily before transition
     const bunnyGroup = document.querySelector('#bunny-scene-2 .bunny-group');
     if (bunnyGroup) {
       bunnyGroup.style.transform = 'translateY(6px) rotate(4deg)';
@@ -205,18 +205,74 @@ document.addEventListener('DOMContentLoaded', () => {
   btnOpenGift?.addEventListener('click', openGiftBox);
   giftBox?.addEventListener('click', openGiftBox);
 
-  // --- SCENE 6 SEQUENTIAL TIMED FADE-IN ---
+  // --- SCENE 6 SEQUENTIAL TIMED FADE-IN WITH FAST-FORWARD ---
+  function clearScene6Timers() {
+    scene6Timers.forEach(t => clearTimeout(t));
+    scene6Timers = [];
+  }
+
   function triggerSincereMessageSequence() {
+    clearScene6Timers();
+
+    const step1 = document.getElementById('sincere-step-1');
     const step2 = document.getElementById('sincere-step-2');
     const step3 = document.getElementById('sincere-step-3');
+    const lines = document.querySelectorAll('.sincere-line');
 
-    if (step2) {
-      setTimeout(() => step2.classList.add('show'), 700);
-    }
-    if (step3) {
-      setTimeout(() => step3.classList.add('show'), 3300);
-    }
+    // Reset to hidden state
+    step1?.classList.remove('show');
+    step2?.classList.remove('show');
+    step3?.classList.remove('show');
+    lines.forEach(l => l.classList.remove('revealed'));
+
+    // 1. «И последнее...» appears at 350ms
+    scene6Timers.push(setTimeout(() => {
+      step1?.classList.add('show');
+    }, 350));
+
+    // 2. Card block smoothly unfolds at 1500ms
+    scene6Timers.push(setTimeout(() => {
+      step2?.classList.add('show');
+    }, 1500));
+
+    // 3. Line 1 appears at 2100ms
+    scene6Timers.push(setTimeout(() => {
+      lines[0]?.classList.add('revealed');
+    }, 2100));
+
+    // 4. Line 2 appears at 3000ms
+    scene6Timers.push(setTimeout(() => {
+      lines[1]?.classList.add('revealed');
+    }, 3000));
+
+    // 5. Line 3 appears at 3900ms
+    scene6Timers.push(setTimeout(() => {
+      lines[2]?.classList.add('revealed');
+    }, 3900));
+
+    // 6. Line 4 appears with accent at 4800ms
+    scene6Timers.push(setTimeout(() => {
+      lines[3]?.classList.add('revealed');
+      spawnBurst(window.innerWidth / 2, window.innerHeight * 0.45, 15);
+    }, 4800));
+
+    // 7. Prompt & Button appear at 5900ms
+    scene6Timers.push(setTimeout(() => {
+      step3?.classList.add('show');
+    }, 5900));
   }
+
+  // Allow clicking anywhere on Scene 6 to instantly complete all animations if user is fast
+  document.getElementById('scene-6')?.addEventListener('click', (e) => {
+    // Only if not clicking the button itself
+    if (e.target.id === 'btn-scene-6-next' || e.target.closest('#btn-scene-6-next')) return;
+
+    clearScene6Timers();
+    document.getElementById('sincere-step-1')?.classList.add('show');
+    document.getElementById('sincere-step-2')?.classList.add('show');
+    document.querySelectorAll('.sincere-line').forEach(l => l.classList.add('revealed'));
+    document.getElementById('sincere-step-3')?.classList.add('show');
+  });
 
   // --- SCENE 7 INTERACTIVE "ДА" / "НЕТ" QUESTION ---
   const btnYes = document.getElementById('btn-yes');
@@ -260,7 +316,7 @@ document.addEventListener('DOMContentLoaded', () => {
     btnNo.addEventListener('touchstart', dodgeHandler, { passive: true });
   }
 
-  // --- EASTER EGG SYSTEM (Interactive Bunny Expressions) ---
+  // --- EASTER EGG SYSTEM (Interactive Bunny with Floating Reactions & Wiggle) ---
   function showToast(message) {
     if (!toastEl) return;
     toastEl.textContent = message;
@@ -276,22 +332,60 @@ document.addEventListener('DOMContentLoaded', () => {
         el.classList.toggle('active', s === stateName);
       }
     });
+
+    const mouthDefault = document.getElementById('bunny-mouth-default');
+    const mouthHappy = document.getElementById('bunny-mouth-happy');
+    if (mouthDefault && mouthHappy) {
+      if (stateName === 'happy' || stateName === 'hearts') {
+        mouthDefault.classList.add('hidden');
+        mouthHappy.classList.remove('hidden');
+      } else {
+        mouthDefault.classList.remove('hidden');
+        mouthHappy.classList.add('hidden');
+      }
+    }
+  }
+
+  function popReactionBubble(container, emoji) {
+    const bubble = container.querySelector('.bunny-bubble');
+    if (!bubble) return;
+
+    bubble.textContent = emoji;
+    bubble.classList.remove('pop');
+    void bubble.offsetWidth;
+    bubble.classList.add('pop');
+
+    setTimeout(() => {
+      bubble.classList.remove('pop');
+    }, 1200);
   }
 
   document.querySelectorAll('[data-easter-egg="true"]').forEach(bunnyEl => {
     bunnyEl.addEventListener('click', () => {
       easterEggTapCount++;
       const rect = bunnyEl.getBoundingClientRect();
-      spawnBurst(rect.left + rect.width / 2, rect.top + rect.height / 2, 8);
+      spawnBurst(rect.left + rect.width / 2, rect.top + rect.height / 2, 10);
+
+      // Bounce the bunny character
+      const bunnyGroup = bunnyEl.querySelector('.bunny-group');
+      if (bunnyGroup) {
+        bunnyGroup.classList.remove('bunny-bounce');
+        void bunnyGroup.offsetWidth;
+        bunnyGroup.classList.add('bunny-bounce');
+      }
 
       if (easterEggTapCount === 1) {
         setBunnyExpression('happy');
+        popReactionBubble(bunnyEl, '😊');
       } else if (easterEggTapCount === 2) {
         setBunnyExpression('hearts');
+        popReactionBubble(bunnyEl, '❤️');
       } else if (easterEggTapCount === 3) {
         setBunnyExpression('happy');
+        popReactionBubble(bunnyEl, '🥰');
       } else if (easterEggTapCount >= 4) {
         setBunnyExpression('hearts');
+        popReactionBubble(bunnyEl, '😂❤️');
         showToast('Ну всё, хватит меня тыкать 😂❤️');
         easterEggTapCount = 0;
         setTimeout(() => setBunnyExpression('normal'), 4000);

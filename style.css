@@ -271,7 +271,7 @@ html, body {
 }
 
 /* ==========================================================================
-   SCENE 2 — PLUSH BUNNY
+   SCENE 2 — PLUSH BUNNY & EASTER EGG
    ========================================================================== */
 .bunny-container {
   position: relative;
@@ -298,6 +298,11 @@ html, body {
   animation: ear-right-sway 4.5s infinite ease-in-out;
 }
 
+/* Happy wiggle on tap */
+.bunny-group.bunny-bounce {
+  animation: bunny-tap-bounce 0.45s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
 .bunny-container:active .bunny-group {
   transform: scale(1.05) rotate(2deg);
 }
@@ -315,6 +320,29 @@ html, body {
   color: var(--text-light);
   margin-top: 4px;
   opacity: 0.85;
+}
+
+/* Floating Reaction Bubble */
+.bunny-bubble {
+  position: absolute;
+  top: -12px;
+  left: 50%;
+  transform: translateX(-50%) translateY(0) scale(0);
+  background: #FFFDF9;
+  border: 1.5px solid rgba(201, 122, 118, 0.35);
+  box-shadow: 0 4px 18px rgba(74, 52, 55, 0.14);
+  border-radius: var(--radius-pill);
+  padding: 4px 12px;
+  font-size: 20px;
+  pointer-events: none;
+  opacity: 0;
+  transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.3s ease;
+  z-index: 25;
+}
+
+.bunny-bubble.pop {
+  transform: translateX(-50%) translateY(-22px) scale(1.15);
+  opacity: 1;
 }
 
 /* ==========================================================================
@@ -361,7 +389,7 @@ html, body {
 }
 
 /* ==========================================================================
-   SCENE 4 — FLOWERS
+   SCENE 4 — FLOWERS (LAYERED BOUQUET)
    ========================================================================== */
 .bouquet-wrapper {
   margin-bottom: 4px;
@@ -380,11 +408,11 @@ html, body {
   opacity: 0;
 }
 
-.b-flowers-group > g:nth-child(1) .flower-anim { animation-delay: 0.2s; }
-.b-flowers-group > g:nth-child(2) .flower-anim { animation-delay: 0.4s; }
-.b-flowers-group > g:nth-child(3) .flower-anim { animation-delay: 0.6s; }
-.b-flowers-group > g:nth-child(4) .flower-anim { animation-delay: 0.8s; }
-.b-flowers-group > g:nth-child(5) .flower-anim { animation-delay: 1.0s; }
+.b-blossoms > g:nth-child(1) .flower-anim { animation-delay: 0.2s; }
+.b-blossoms > g:nth-child(2) .flower-anim { animation-delay: 0.4s; }
+.b-blossoms > g:nth-child(3) .flower-anim { animation-delay: 0.6s; }
+.b-blossoms > g:nth-child(4) .flower-anim { animation-delay: 0.8s; }
+.b-blossoms > g:nth-child(5) .flower-anim { animation-delay: 1.0s; }
 
 /* ==========================================================================
    SCENE 5 — GIFT
@@ -463,11 +491,34 @@ html, body {
 }
 
 /* ==========================================================================
-   SCENE 6 — SINCERE MESSAGE
+   SCENE 6 — SINCERE MESSAGE (ANIMATED STAGGERED REVEAL)
    ========================================================================== */
 .sincere-block {
   width: 100%;
   margin-bottom: 12px;
+}
+
+/* Initial hidden states for sequential reveal */
+.sincere-step-intro {
+  opacity: 0;
+  transform: translateY(14px);
+  transition: opacity 0.8s cubic-bezier(0.25, 1, 0.5, 1), transform 0.8s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.sincere-step-intro.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.sincere-step-card {
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity 0.8s cubic-bezier(0.25, 1, 0.5, 1), transform 0.8s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.sincere-step-card.show {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 .sincere-card {
@@ -486,21 +537,17 @@ html, body {
   line-height: 1.6;
 }
 
+/* Individual line animations */
 .sincere-card .sincere-line {
   opacity: 0;
-  transform: translateY(8px);
+  transform: translateY(10px);
   transition: opacity 0.7s cubic-bezier(0.25, 1, 0.5, 1), transform 0.7s cubic-bezier(0.25, 1, 0.5, 1);
 }
 
-.sincere-block.show .sincere-card .sincere-line {
+.sincere-card .sincere-line.revealed {
   opacity: 1;
   transform: translateY(0);
 }
-
-.sincere-block.show .sincere-card .line-1 { transition-delay: 0.15s; }
-.sincere-block.show .sincere-card .line-2 { transition-delay: 0.7s; }
-.sincere-block.show .sincere-card .line-3 { transition-delay: 1.25s; }
-.sincere-block.show .sincere-card .line-4 { transition-delay: 1.8s; }
 
 .sincere-highlight {
   font-weight: 600;
@@ -510,6 +557,17 @@ html, body {
 .final-highlight {
   font-weight: 600;
   color: var(--primary-rose);
+}
+
+.sincere-step-prompt {
+  opacity: 0;
+  transform: translateY(14px);
+  transition: opacity 0.8s cubic-bezier(0.25, 1, 0.5, 1), transform 0.8s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.sincere-step-prompt.show {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 .scene-question-prompt {
@@ -598,11 +656,6 @@ html, body {
   line-height: 1.6;
 }
 
-.final-apology {
-  font-weight: 600;
-  color: var(--primary-rose);
-}
-
 .final-wish-container {
   margin-bottom: 12px;
 }
@@ -624,6 +677,7 @@ html, body {
 
 .final-illustration {
   cursor: pointer;
+  position: relative;
 }
 
 /* --- TOAST NOTIFICATION --- */
@@ -660,15 +714,9 @@ html, body {
 .hidden-fade.show {
   display: block !important;
   opacity: 1;
-  animation: fade-in 0.5s ease-out forwards;
 }
 
 /* --- KEYFRAME ANIMATIONS --- */
-@keyframes fade-in {
-  0% { opacity: 0; transform: translateY(6px); }
-  100% { opacity: 1; transform: translateY(0); }
-}
-
 @keyframes heart-breathe {
   0%, 100% { transform: scale(1); }
   50% { transform: scale(1.18); }
@@ -682,6 +730,13 @@ html, body {
 @keyframes bunny-breathe {
   0%, 100% { transform: translateY(0); }
   50% { transform: translateY(-3px); }
+}
+
+@keyframes bunny-tap-bounce {
+  0% { transform: scale(1); }
+  35% { transform: scale(1.12) rotate(-4deg); }
+  70% { transform: scale(1.06) rotate(3deg); }
+  100% { transform: scale(1) rotate(0deg); }
 }
 
 @keyframes ear-left-sway {
